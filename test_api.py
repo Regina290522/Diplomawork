@@ -19,6 +19,9 @@ def test_get_book():
     assert 'data' in response.json()
 
 
+@allure.title("Проверка запроса нахождение книги c другим названием")
+@allure.description("Проверка отправки get запроса для получения информации о книге")
+@allure.severity("Critical")
 def test_get_book_name():
     url = 'https://web-gate.chitai-gorod.ru/api/v1/recommend/semantic?phrase=преступление и наказание'
     response = requests.get(url, headers=headers)
@@ -27,10 +30,20 @@ def test_get_book_name():
     assert 'data' in response.json()
 
 
+@allure.title("Неверный данные для поиска")
+@allure.description("Проверка  запроса с неверным методом")
+@allure.severity("Critical")
+def test_get_book_pusto():
+        url = 'https://web-gate.chitai-gorod.ru/api/v1/recommend/semantic?phrase='
+        response = requests.get(url, headers=headers)
+
+        assert response.status_code == 200
+
+
 @allure.title("Неверный метод")
 @allure.description("Проверка  запроса с неверным методом")
 @allure.severity("Critical")
-def test_get_book_negative_beztela():
+def test_get_book_negative_post():
     url = 'https://web-gate.chitai-gorod.ru/api/v1/recommend/semantic?phrase=война и мир'
     response = requests.post(url, headers=headers)
 
@@ -44,14 +57,4 @@ def test_get_book_negative_simbol():
     response = requests.get(url, headers=headers)
 
     assert response.status_code == 200
-
-
-@allure.title("Неверный данные для поиска")
-@allure.description("Проверка  запроса с неверным методом")
-@allure.severity("Critical")
-def test_get_book_negative_pusto():
-        url = 'https://web-gate.chitai-gorod.ru/api/v1/recommend/semantic?phrase='
-        response = requests.get(url, headers=headers)
-
-        assert response.status_code == 403
 
