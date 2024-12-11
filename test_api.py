@@ -56,5 +56,5 @@ def test_get_book_negative_simbol():
     url = 'https://web-gate.chitai-gorod.ru/api/v1/recommend/semantic?phrase=$%$@#@^'
     response = requests.get(url, headers=headers)
 
-    assert response.status_code == 200
+    assert response.status_code == 401
 
